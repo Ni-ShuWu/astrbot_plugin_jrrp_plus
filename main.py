@@ -1,3 +1,9 @@
+import sys
+import os
+import random
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
 from astrbot.api.event import filter, AstrMessageEvent
 from astrbot.api.star import Context, Star, StarTools, register
 from astrbot.api import logger
@@ -5,8 +11,6 @@ from astrbot.api import logger
 from jrrp import generate_fortune
 from tarot import draw_spread, format_spread_result
 from data import DailyTarotRecord
-
-import random
 
 DISCLAIMER = "\n\n仅供娱乐，请勿当真\n请不要因此摔手机砸电脑等~"
 

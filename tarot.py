@@ -215,4 +215,3 @@ def _spread_celtic_cross(rng: random.Random) -> dict:
         "cards": cards_info,
         "positions_desc": "经典十张牌阵，全面剖析你当下的处境。",
     }
-
