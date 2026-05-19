@@ -10,7 +10,7 @@ from astrbot.api import logger
 
 from jrrp import generate_fortune
 from tarot import draw_spread, format_spread_result
-from data import DailyTarotRecord
+from daily_tarot import DailyTarotRecord
 
 DISCLAIMER = "\n\n仅供娱乐，请勿当真\n请不要因此摔手机砸电脑等~"
 
