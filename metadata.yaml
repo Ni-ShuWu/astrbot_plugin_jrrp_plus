@@ -2,6 +2,6 @@ name: jrrp_plus
 display_name: 今日人品+
 desc: 今日人品 & 塔罗牌全牌占卜插件。支持 /jrrp（每日人品）、/tarot（单张）、/tarot3（三牌阵）、/tarot_celtic（凯尔特十字）、/daily（人品+塔罗同步）。每种塔罗牌阵每天独立限抽一次。
 short_desc: 每日人品 + 78张塔罗全牌占卜，每天一次精准指引！
-version: v2.2.0
+version: v2.2.1
 author: Ni-ShuWu
 repo: https://github.com/Ni-ShuWu/astrbot_plugin_jrrp_plus
