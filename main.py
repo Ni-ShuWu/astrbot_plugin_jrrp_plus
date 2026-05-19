@@ -18,7 +18,7 @@ DISCLAIMER = "\n\n仅供娱乐，请勿当真\n请不要因此摔手机砸电脑
 @register(
     "jrrp_plus",
     "Ni-ShuWu",
-    "今日人品 & 塔罗牌占卜插件。支持 /jrrp, /tarot, /tarot3, /tarot_celtic, /daily 等命令。",
+    "今日人品 & 塔罗牌占卜插件。支持 /jrrp, /tarot, /tarot3, /tarot_celtic, /daily 等命令。每种塔罗牌阵每天独立限抽一次。",
     "2.2.0",
     "https://github.com/Ni-ShuWu/astrbot_plugin_jrrp_plus",
 )
@@ -45,10 +45,10 @@ class JrrpPlusPlugin(Star):
     @filter.command("tarot")
     async def tarot(self, event: AstrMessageEvent):
         user_id = event.get_sender_id()
-        cached = self.tarot_record.load(user_id)
+        cached = self.tarot_record.load(user_id, "single")
         if cached:
             text = (
-                "你已经抽过今天的塔罗牌了，这是你今天的指引：\n"
+                "你今天已经抽过单张塔罗牌了，这是今天的指引：\n"
                 f"{format_spread_result(cached)}"
                 f"{DISCLAIMER}"
             )
@@ -63,10 +63,10 @@ class JrrpPlusPlugin(Star):
     @filter.command("tarot3")
     async def tarot3(self, event: AstrMessageEvent):
         user_id = event.get_sender_id()
-        cached = self.tarot_record.load(user_id)
+        cached = self.tarot_record.load(user_id, "three")
         if cached:
             text = (
-                "你今天已经抽过塔罗牌了，这是你今天的牌面：\n"
+                "你今天已经抽过三牌阵了，这是今天的牌面：\n"
                 f"{format_spread_result(cached)}"
                 f"{DISCLAIMER}"
             )
@@ -81,10 +81,10 @@ class JrrpPlusPlugin(Star):
     @filter.command("tarot_celtic")
     async def tarot_celtic(self, event: AstrMessageEvent):
         user_id = event.get_sender_id()
-        cached = self.tarot_record.load(user_id)
+        cached = self.tarot_record.load(user_id, "celtic_cross")
         if cached:
             text = (
-                "你今天已经抽过塔罗牌了，这是你今天的牌面：\n"
+                "你今天已经抽过凯尔特十字阵了，这是今天的牌面：\n"
                 f"{format_spread_result(cached)}"
                 f"{DISCLAIMER}"
             )
@@ -108,7 +108,7 @@ class JrrpPlusPlugin(Star):
             f"{description}"
         )
 
-        cached = self.tarot_record.load(user_id)
+        cached = self.tarot_record.load(user_id, "single")
         if cached:
             tarot_text = (
                 f"\n\n━━━ 今日塔罗指引（已抽取）━━━\n"
