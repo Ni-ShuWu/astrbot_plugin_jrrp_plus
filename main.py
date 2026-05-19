@@ -1,6 +1,10 @@
 import sys
 import os
 import random
+import json
+from pathlib import Path
+from datetime import datetime, timezone, timedelta
+from typing import Optional
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
@@ -10,9 +14,45 @@ from astrbot.api import logger
 
 from jrrp import generate_fortune
 from tarot import draw_spread, format_spread_result
-from daily_tarot import DailyTarotRecord
+
+CST = timezone(timedelta(hours=8), "Asia/Shanghai")
 
 DISCLAIMER = "\n\n仅供娱乐，请勿当真\n请不要因此摔手机砸电脑等~"
+
+
+class DailyTarotRecord:
+    def __init__(self, data_dir: Path):
+        self.data_dir = data_dir
+        self.data_dir.mkdir(parents=True, exist_ok=True)
+
+    def _get_today(self) -> str:
+        return datetime.now(CST).strftime("%Y%m%d")
+
+    def _get_path(self, user_id: str, spread_type: str) -> Path:
+        return self.data_dir / f"{self._get_today()}_{user_id}_{spread_type}.json"
+
+    def save(self, user_id: str, spread_type: str, result: dict):
+        path = self._get_path(user_id, spread_type)
+        data = {
+            "date": self._get_today(),
+            "spread_type": spread_type,
+            "spread_name": result["spread_name"],
+            "cards": result["cards"],
+            "positions_desc": result.get("positions_desc", ""),
+            "timestamp": datetime.now(CST).isoformat(),
+        }
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+
+    def load(self, user_id: str, spread_type: str) -> Optional[dict]:
+        path = self._get_path(user_id, spread_type)
+        if path.exists():
+            with open(path, "r", encoding="utf-8") as f:
+                return json.load(f)
+        return None
+
+    def has_drawn(self, user_id: str, spread_type: str) -> bool:
+        return self._get_path(user_id, spread_type).exists()
 
 
 @register(
