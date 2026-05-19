@@ -14,11 +14,11 @@ class DailyTarotRecord:
     def _get_today(self) -> str:
         return datetime.now(CST).strftime("%Y%m%d")
 
-    def _get_path(self, user_id: str) -> Path:
-        return self.data_dir / f"{self._get_today()}_{user_id}.json"
+    def _get_path(self, user_id: str, spread_type: str) -> Path:
+        return self.data_dir / f"{self._get_today()}_{user_id}_{spread_type}.json"
 
     def save(self, user_id: str, spread_type: str, result: dict):
-        path = self._get_path(user_id)
+        path = self._get_path(user_id, spread_type)
         data = {
             "date": self._get_today(),
             "spread_type": spread_type,
@@ -30,12 +30,12 @@ class DailyTarotRecord:
         with open(path, "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
 
-    def load(self, user_id: str) -> Optional[dict]:
-        path = self._get_path(user_id)
+    def load(self, user_id: str, spread_type: str) -> Optional[dict]:
+        path = self._get_path(user_id, spread_type)
         if path.exists():
             with open(path, "r", encoding="utf-8") as f:
                 return json.load(f)
         return None
 
-    def has_drawn(self, user_id: str) -> bool:
-        return self._get_path(user_id).exists()
+    def has_drawn(self, user_id: str, spread_type: str) -> bool:
+        return self._get_path(user_id, spread_type).exists()
