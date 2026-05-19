@@ -38,10 +38,9 @@ AstrBot 今日人品 & 塔罗牌全牌占卜插件。
 
 ```
 astrbot_plugin_jrrp_plus/
-├── main.py          # 插件入口，命令调度
+├── main.py          # 插件入口 + 每日抽牌记录存储
 ├── tarot.py         # 78 张塔罗牌 + 牌阵逻辑
 ├── jrrp.py          # 人品值生成
-├── daily_tarot.py   # 每日抽牌结果持久化
 └── metadata.yaml    # 插件元数据
 ```
 
