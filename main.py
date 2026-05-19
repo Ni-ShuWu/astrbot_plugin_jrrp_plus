@@ -19,7 +19,7 @@ DISCLAIMER = "\n\n仅供娱乐，请勿当真\n请不要因此摔手机砸电脑
     "jrrp_plus",
     "Ni-ShuWu",
     "今日人品 & 塔罗牌占卜插件。支持 /jrrp, /tarot, /tarot3, /tarot_celtic, /daily 等命令。每种塔罗牌阵每天独立限抽一次。",
-    "2.2.0",
+    "2.2.1",
     "https://github.com/Ni-ShuWu/astrbot_plugin_jrrp_plus",
 )
 class JrrpPlusPlugin(Star):
